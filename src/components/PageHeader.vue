@@ -9,3 +9,10 @@
 import PageHeader from 'ant-design-vue/es/page-header'
 import AntDevider from 'ant-design-vue/es/divider'
 </script>
+
+<style>
+.ant-page-header-heading-left {
+    display: flex;
+    flex-wrap: wrap;
+}
+</style>

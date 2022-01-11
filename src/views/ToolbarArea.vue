@@ -6,7 +6,12 @@
       @click.stop="onComponentClick(component)"
     >
       <div class="toolbar-area-item__name">{{ component.hName }}:</div>
-      <entity-entry draggable :component-data="component" class="toolbar-area-item__preview" />
+      <entity-entry
+        draggable
+        :disabled="component.toolbarProps?.disabled"
+        :component-data="component"
+        class="toolbar-area-item__preview"
+      />
     </div>
   </div>
 </template>

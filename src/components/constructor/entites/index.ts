@@ -3,7 +3,7 @@ import APageHeader from "ant-design-vue/lib/page-header";
 import ADivider from "ant-design-vue/lib/divider";
 import ADatePicker from "ant-design-vue/lib/date-picker";
 import AImage from "ant-design-vue/lib/image";
-import AInput from "ant-design-vue/lib/input";
+import { Textarea } from "ant-design-vue/lib/input";
 import AAvatar from "ant-design-vue/lib/avatar";
 import ACarousel from "ant-design-vue/lib/carousel";
 import { h, VNode } from "vue";
@@ -14,12 +14,17 @@ const defaultStyles = {
   height: "100%",
 };
 
+export interface ToolbarProps {
+  disabled?: boolean;
+}
+
 export interface CustomComponent {
   id?: number;
   name: string;
   hName: string;
   renderer: VNode;
   style: Partial<CSSStyleDeclaration>;
+  toolbarProps?: ToolbarProps;
 }
 
 export interface CustomComponentsMap {
@@ -33,20 +38,26 @@ export const components: CustomComponentsMap = {
     hName: "Пустой",
     style: { ...defaultStyles },
   },
-  TextData: {
-    renderer: h(AInput),
-    name: "TextData",
+  Textarea: {
+    renderer: h(Textarea, {
+      style: { touchAction: "auto" },
+      onClick: (e: MouseEvent) => (e.target as HTMLInputElement).focus(),
+    }),
+    name: "Textarea",
     hName: "Текст",
     style: { ...defaultStyles },
   },
   AButton: {
-    renderer: h(AButton, { x: 1 }, { default: () => "Кнопка" }),
+    renderer: h(AButton, { default: () => "Кнопка" }),
     name: "AButton",
     hName: "Кнопка",
     style: { ...defaultStyles },
   },
   APageHeader: {
-    renderer: h(APageHeader, null, { default: () => "Заголовок" }),
+    renderer: h(APageHeader, {
+      title: "Заголовок",
+      subTitle: "Описание",
+    }),
     name: "APageHeader",
     hName: "Заголовок",
     style: { ...defaultStyles },
@@ -62,6 +73,7 @@ export const components: CustomComponentsMap = {
     name: "ADatePicker",
     hName: "Дата",
     style: { ...defaultStyles },
+    toolbarProps: { disabled: true },
   },
   AAvatar: {
     renderer: h(AAvatar, {}),
@@ -78,13 +90,10 @@ export const components: CustomComponentsMap = {
       },
       {
         default: () => [
-          h(
-            "div",
-            h(AImage, {
-              preview: false,
-              src: "https://picsum.photos/600/200?1",
-            })
-          ),
+          h(AImage, {
+            preview: false,
+            src: "https://picsum.photos/600/200?1",
+          }),
           h(AImage, {
             preview: false,
             src: "https://picsum.photos/600/200?2",

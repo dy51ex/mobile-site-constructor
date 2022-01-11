@@ -11,8 +11,9 @@
                     :key="currentComponent.id"
                     :is="currentComponent.renderer"
                     :style="currentComponent.style"
-                    @click="onComponentClick"
+                    :disabled="disabled"
                     draggable
+                    @click="onComponentClick"
                 ></component>
             </transition>
         </div>
@@ -118,13 +119,13 @@ const onComponentClick = (type: string) => {
     position: relative;
     .delete-btn {
         position: absolute;
-        right: -5px;
-        top: -5px;
+        right: 0px;
+        top: 0px;
     }
     .settings-btn {
         position: absolute;
-        right: -5px;
-        bottom: -5px;
+        right: 0px;
+        bottom: 0px;
     }
     &-wrapper {
         width: 100%;
