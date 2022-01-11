@@ -48,7 +48,7 @@ export const components: CustomComponentsMap = {
     style: { ...defaultStyles },
   },
   AButton: {
-    renderer: h(AButton, { default: () => "Кнопка" }),
+    renderer: h(AButton, null, { default: () => "Кнопка" }),
     name: "AButton",
     hName: "Кнопка",
     style: { ...defaultStyles },
